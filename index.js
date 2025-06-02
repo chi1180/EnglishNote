@@ -1,14 +1,16 @@
-const { app, BrowserWindow, dialog, ipcMain } = require("electron");
+const { app, BrowserWindow, dialog, ipcMain, screen } = require("electron");
 const fs = require("node:fs");
 const path = require("node:path");
 
 function createWindow() {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: width,
+    height: height,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+    autoHideMenuBar: true,
   });
 
   win.loadFile("index.html");
@@ -32,8 +34,41 @@ app.on("window-all-closed", () => {
 
 /**ipc */
 
-const notebookDataPath = path.join(__dirname, "./data/notebook.json");
-const vocabraryDataPath = path.join(__dirname, "./data/vocabrary.json");
+const userDataPath = app.getPath("userData");
+const notebookDataPath = path.join(userDataPath, "notebook.json");
+const vocabraryDataPath = path.join(userDataPath, "vocabulary.json");
+
+if (!fs.existsSync(userDataPath)) {
+  fs.mkdirSync(userDataPath, { recursive: true });
+}
+
+function initializeDataFilesSafe() {
+  try {
+    if (!fs.existsSync(notebookDataPath)) {
+      fs.writeFileSync(notebookDataPath, '{"notebooks": []}');
+    } else {
+      const content = fs.readFileSync(notebookDataPath, "utf8").trim();
+      if (content === "") {
+        fs.writeFileSync(notebookDataPath, '{"notebooks": []}');
+      }
+    }
+
+    if (!fs.existsSync(vocabraryDataPath)) {
+      fs.writeFileSync(vocabraryDataPath, '{"vocabularies": []}');
+    } else {
+      const content = fs.readFileSync(vocabraryDataPath, "utf8").trim();
+      if (content === "") {
+        fs.writeFileSync(vocabraryDataPath, '{"vocabularies": []}');
+      }
+    }
+
+    console.log("Data files initialized successfully");
+  } catch (error) {
+    console.error("Error initializing data files:", error);
+  }
+}
+
+initializeDataFilesSafe();
 
 ipcMain.handle("show-file-dialog", async () => {
   const result = await dialog.showOpenDialog({
@@ -65,4 +100,9 @@ ipcMain.handle("write-vocabrary-data", (event, fileData) => {
 ipcMain.handle("write-notebook-data", (event, fileData) => {
   fs.writeFileSync(notebookDataPath, fileData);
   return true;
+});
+
+ipcMain.handle("focus-on-main-window", () => {
+  const mainWindow = BrowserWindow.getFocusedWindow();
+  if (mainWindow) mainWindow.focus();
 });

@@ -90,6 +90,82 @@ textarea:focus {
   border: 2px solid var(--accent-primary);
 }
 
+/* Quiz Styles */
+.quiz-word {
+  font-size: 2.4em;
+  text-align: center;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.quiz-option {
+  width: 100%;
+  height: auto;
+  min-height: 60px;
+  padding: 10px;
+  white-space: normal;
+  word-wrap: break-word;
+  background-color: var(--bg-secondary);
+}
+
+.quiz-feedback {
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.quiz-feedback.correct {
+  background-color: #2ecc71;
+}
+
+.quiz-feedback.incorrect {
+  background-color: #e74c3c;
+}
+
+.quiz-feedback p {
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+.quiz-results {
+  padding: 20px;
+  background-color: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.quiz-review {
+  margin-top: 20px;
+}
+
+.quiz-review-item {
+  margin: 10px 0;
+  padding: 10px;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+}
+
+.quiz-review-item p {
+  margin: 5px 0;
+}
+
+.quiz-review-item .correct {
+  color: #2ecc71;
+}
+
+.quiz-review-item .incorrect {
+  color: #e74c3c;
+}
+
 button {
   height: 46px;
   width: 102px;
@@ -137,20 +213,23 @@ button {
 
 .note-books-section-left {
   width: 26%;
-  overflow-y: scroll;
   padding: 12px;
 }
 
 .note-book-list {
   height: calc(50% - 12px);
+  overflow-x: hidden;
+  overflow-y: scroll;
   width: 100%;
   margin-bottom: 12px;
   border-bottom: 1px solid var(--accent-primary);
 }
 
-.vocabrary-container {
+.vocab-contents {
   height: 50%;
   width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .vocabrary-card {

@@ -71,6 +71,7 @@ class VocabularyView {
         click: () => this.showAddForm(),
       },
     });
+
     this.vocabManageContainer.appendChild(addButton);
   }
 
@@ -106,8 +107,17 @@ class VocabularyView {
         click: () => this.handleAddWord(wordInput, meanInput, exampleInput),
       },
     });
+    const addButtonContainer = createElement("div", {
+      className: "flex-end",
+    });
+    addButtonContainer.appendChild(addButton);
 
-    appendChildren(field, [wordInput, meanInput, exampleInput, addButton]);
+    appendChildren(field, [
+      wordInput,
+      meanInput,
+      exampleInput,
+      addButtonContainer,
+    ]);
     this.vocabManageContainer.appendChild(field);
   }
 
@@ -138,6 +148,21 @@ class VocabularyView {
         alert("Error adding word: ".concat(error.message));
       }
     }
+  }
+
+  async getAllVocabulary() {
+    const notebooks = document.querySelectorAll('.notebook');
+    let allVocabulary = [];
+    
+    for (const notebook of notebooks) {
+      const notebookId = notebook.dataset.id;
+      const words = await vocabularyModel.getVocabulariesByNotebookId(notebookId);
+      if (words && words.length > 0) {
+        allVocabulary = [...allVocabulary, ...words];
+      }
+    }
+    
+    return allVocabulary;
   }
 }
 

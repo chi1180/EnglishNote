@@ -2,6 +2,7 @@
 export class VocabularyModel {
   constructor() {
     this.vocabularies = [];
+    this.quizWords = [];
   }
 
   async loadVocabularies() {
@@ -108,6 +109,43 @@ export class VocabularyModel {
       console.error('Error saving vocabularies:', error);
       return false;
     }
+  }
+
+  async getAllWords() {
+    if (!this.vocabularies.length) {
+      await this.loadVocabularies();
+    }
+    
+    return this.vocabularies.reduce((allWords, vocab) => {
+      return allWords.concat(vocab.words);
+    }, []);
+  }
+
+  async getQuizWords() {
+    const allWords = await this.getAllWords();
+    return allWords.filter(word => {
+      // Filter out words that have been mastered
+      if (word.entered_count >= 5) {
+        const correctRate = word.corrected_count / word.entered_count;
+        if (correctRate >= 0.8) return false;
+      }
+      return true;
+    });
+  }
+
+  async updateWordQuizStats(word, isCorrect) {
+    for (const vocab of this.vocabularies) {
+      const wordObj = vocab.words.find(w => w.word === word);
+      if (wordObj) {
+        wordObj.entered_count = (wordObj.entered_count || 0) + 1;
+        if (isCorrect) {
+          wordObj.corrected_count = (wordObj.corrected_count || 0) + 1;
+        }
+        await this.saveVocabularies();
+        return true;
+      }
+    }
+    return false;
   }
 }
 

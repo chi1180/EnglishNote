@@ -26,4 +26,7 @@ contextBridge.exposeInMainWorld("electron", {
   writeNotebookData: async (fileData) => {
     await ipcRenderer.invoke("write-notebook-data", fileData);
   },
+  focusOnMainWindow: async () => {
+    await ipcRenderer.invoke("focus-on-main-window");
+  },
 });
