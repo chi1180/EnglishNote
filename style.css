@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
+
+:root {
+  --font-primary: #eeeeee;
+  --font-secondary: #1a1a1a;
+  --bg-primary: #222831;
+  --bg-secondary: #31363f;
+  --accent-primary: #76abae;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  list-style: none;
+  text-decoration: none;
+  color: var(--font-primary);
+  font-family: "Noto Sans JP", sans-serif;
+}
+
+body {
+  background-color: var(--bg-primary);
+  padding: 20px 40px;
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.top-container > section:nth-of-type(1) {
+  width: 35%;
+}
+
+.top-container > section:nth-of-type(2) {
+  width: 65%;
+}
+
+section {
+  padding-block: 20px;
+}
+
+h1 {
+  font-size: 2.2em;
+}
+
+hr {
+  margin-block: 10px 20px;
+}
+
+fieldset {
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--accent-primary);
+}
+
+legend {
+  font-size: 1.2em;
+  padding-inline: 6px;
+}
+
+input[type="text"],
+textarea {
+  height: 32px;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  padding: 4px 8px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: all;
+  animation-duration: 300;
+  color: var(--font-primary);
+  font-size: 1.2em;
+}
+
+textarea {
+  resize: vertical;
+  height: 128px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid var(--accent-primary);
+}
+
+button {
+  height: 46px;
+  width: 102px;
+  border-radius: 12px;
+  border: none;
+  color: var(--font-secondary);
+  font-size: 1.2em;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.btn-primary {
+  background-color: var(--bg-secondary);
+  color: var(--font-primary);
+}
+
+.flex-end {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.flex-between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.note-books-section {
+  height: 100vh;
+}
+
+.note-books-section > .flex-between {
+  height: calc(100% - 40px);
+}
+
+.flex-col-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-books-section-left {
+  width: 26%;
+  overflow-y: scroll;
+  padding: 12px;
+}
+
+.note-book-list {
+  height: calc(50% - 12px);
+  width: 100%;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--accent-primary);
+}
+
+.vocabrary-container {
+  height: 50%;
+  width: 100%;
+}
+
+.vocabrary-card {
+  width: 100%;
+  height: 46px;
+  padding: 4px 12px;
+  margin-bottom: 4px;
+  border-radius: 6px 0 6px 0;
+  background-color: var(--bg-secondary);
+  cursor: pointer;
+  overflow: hidden;
+
+  & > .word {
+    font-size: 1.6rem;
+  }
+}
+
+.vocabrary-card.expand {
+  height: fit-content;
+
+  & > .mean {
+    font-size: 1.4em;
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+
+  & > .example {
+    font-size: 1.2em;
+    padding-bottom: 12px;
+  }
+}
+
+.notebook {
+  width: 100%;
+  margin-bottom: 6px;
+  padding-block: 12px;
+  padding-left: 18px;
+  border-radius: 12px;
+  background-color: var(--bg-secondary);
+  transition: all 0.3s;
+  cursor: pointer;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+}
+
+.notebook-selected {
+  opacity: 1;
+  background-color: var(--accent-primary);
+  color: var(--font-secondary);
+}
+
+.note-book-viewer {
+  height: 100%;
+  width: 74%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding: 12px;
+  border-left: 1px solid var(--accent-primary);
+}
+
+.vocab-manage-container {
+  padding-bottom: 6px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

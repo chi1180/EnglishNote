@@ -1,0 +1,16 @@
+{
+  "vocabraries": [
+    {
+      "id": "oaismcoaksmclsiocascm",
+      "words": [
+        {
+          "word": "estimate",
+          "mean": "予測する",
+          "example": "We estimated that most people around the world well increase.",
+          "entered_count": 0,
+          "corrected_count": 0
+        }
+      ]
+    }
+  ]
+}

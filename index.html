@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>English Note 📒</title>
+  </head>
+  <body>
+    <div class="top-container">
+      <section>
+        <h1>Create new note book</h1>
+        <hr />
+        <form action="/" id="newNoteBookForm">
+          <fieldset>
+            <legend>Note book name</legend>
+            <input
+              id="newNoteBookForm_name"
+              type="text"
+              autocomplete="false"
+              placeholder="Enter new note book's name here"
+              required
+            />
+          </fieldset>
+
+          <fieldset>
+            <legend>PDF files</legend>
+            <div class="flex-between">
+              <button onclick="browserFile()" class="btn-primary">
+                Browse
+              </button>
+              <p id="selected-file-path"></p>
+            </div>
+          </fieldset>
+
+          <div class="flex-end">
+            <button type="submit" class="btn-primary">Add</button>
+          </div>
+        </form>
+      </section>
+      <section>
+        <h1>Vocabrary quiz</h1>
+        <hr />
+        <div id="vocabrary-quiz-container"></div>
+      </section>
+    </div>
+
+    <section class="note-books-section">
+      <h1>Note books</h1>
+      <hr />
+      <div class="flex-between">
+        <div class="flex-col-between note-books-section-left">
+          <ol id="note-book-list" class="note-book-list"></ol>
+          <div id="vocabrary-container" class="vocabrary-container">
+            <div
+              id="vocab-manage-container"
+              class="vocab-manage-container"
+            ></div>
+          </div>
+        </div>
+
+        <div id="note-book-viewer" class="note-book-viewer"></div>
+      </div>
+    </section>
+
+    <!-- Core utilities -->
+    <script type="module" src="./js/utils/domUtils.js"></script>
+    <script type="module" src="./js/utils/fileUtils.js"></script>
+
+    <!-- Models -->
+    <script type="module" src="./js/models/notebookModel.js"></script>
+    <script type="module" src="./js/models/vocabularyModel.js"></script>
+
+    <!-- Views -->
+    <script type="module" src="./js/views/notebookView.js"></script>
+    <script type="module" src="./js/views/vocabularyView.js"></script>
+
+    <!-- Main application -->
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
