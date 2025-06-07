@@ -24,6 +24,10 @@ class VocabularyQuizView {
       className: "quiz-message",
     });
     this.container.appendChild(message);
+
+    setTimeout(() => {
+      this.renderQuizStart(() => window.startNewQuiz());
+    }, 2000);
   }
 
   renderQuestion(questionData, onAnswer) {

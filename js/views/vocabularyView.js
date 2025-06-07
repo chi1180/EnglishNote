@@ -20,7 +20,7 @@ class VocabularyView {
     // Load and display vocabulary words
     const words = await vocabularyModel.getVocabulariesByNotebookId(notebookId);
     if (words && words.length > 0) {
-      for (const word of words) this.createVocabularyCard(word);
+      for (const word of words) this.createVocabularyCard(notebookId, word);
     }
 
     // Show add button for adding new vocabulary
@@ -32,11 +32,16 @@ class VocabularyView {
     clearElement(this.vocabManageContainer);
   }
 
-  createVocabularyCard(wordData) {
+  createVocabularyCard(notebookId, wordData) {
     const card = createElement("div", {
       className: "vocabrary-card",
       listeners: {
         click: (e) => this.toggleCardExpansion(e.currentTarget),
+        contextmenu: (e) => {
+          e.preventDefault();
+          vocabularyModel.deleteWord(notebookId, wordData.word);
+          this.showVocabularyList(notebookId);
+        },
       },
     });
 

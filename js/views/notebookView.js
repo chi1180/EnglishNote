@@ -26,15 +26,14 @@ class NotebookView {
 
   async handleNewNotebookSubmit(e) {
     e.preventDefault();
-    const name = this.newNoteBookFormName.value;
     const filePaths = getBrowsedFilePaths();
-
-    if (name.trim() === "") {
-      alert("Please enter the Note book name");
+    if (!filePaths.length) {
+      alert("Please select PDF file. 🤔");
       return;
     }
 
-    if (!filePaths.length) return;
+    const name =
+      this.newNoteBookFormName.value || filePaths[0].split("/").at(-1);
 
     try {
       await notebookModel.createNotebook(name, filePaths);
@@ -96,6 +95,13 @@ class NotebookView {
         },
         listeners: {
           click: () => this.showNotebook(notebook.id),
+          contextmenu: (e) => {
+            e.preventDefault();
+            notebookModel.deleteNotebook(notebook.id);
+            this.refreshNotebookList();
+            removeAllChildren(this.noteBookViewer);
+            vocabularyView.clearVocabularyContainers();
+          },
         },
       });
 
