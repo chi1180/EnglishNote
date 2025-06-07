@@ -6,7 +6,11 @@ import {
 } from "../utils/domUtils.js";
 import { notebookModel } from "../models/notebookModel.js";
 import { vocabularyView } from "./vocabularyView.js";
-import { browserFile, getBrowsedFilePaths } from "../utils/fileUtils.js";
+import {
+  browserFile,
+  getBrowsedFilePaths,
+  clearBrowsedFilePaths,
+} from "../utils/fileUtils.js";
 
 class NotebookView {
   constructor() {
@@ -42,6 +46,8 @@ class NotebookView {
       clearElement(getById("selected-file-path"));
     } catch (error) {
       alert("Error creating notebook: ".concat(error.message));
+    } finally {
+      clearBrowsedFilePaths();
     }
   }
 
