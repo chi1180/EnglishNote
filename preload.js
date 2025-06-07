@@ -16,9 +16,8 @@ contextBridge.exposeInMainWorld("electron", {
   },
   loadVocabraryData: async () => {
     const fileData = await ipcRenderer.invoke("load-vocabrary-data");
-    if (fileData) {
-      return fileData;
-    }
+    if (fileData) return fileData;
+    return '{"vocabularies": []}';
   },
   writeVocabraryData: async (fileData) => {
     await ipcRenderer.invoke("write-vocabrary-data", fileData);

@@ -26,7 +26,7 @@ export async function loadNotebookData() {
   try {
     return await window.electron.loadNotebookData();
   } catch (error) {
-    console.error('Error loading notebook data:', error);
+    console.error("Error loading notebook data:", error);
     return { notebooks: [] };
   }
 }
@@ -35,8 +35,8 @@ export async function loadVocabularyData() {
   try {
     return await window.electron.loadVocabraryData();
   } catch (error) {
-    console.error('Error loading vocabulary data:', error);
-    return { vocabraries: [] };
+    console.error("Error loading vocabulary data:", error);
+    return { vocabularies: [] };
   }
 }
 
@@ -45,7 +45,7 @@ export async function writeVocabularyData(data) {
     await window.electron.writeVocabraryData(JSON.stringify(data));
     return true;
   } catch (error) {
-    console.error('Error writing vocabulary data:', error);
+    console.error("Error writing vocabulary data:", error);
     return false;
   }
 }

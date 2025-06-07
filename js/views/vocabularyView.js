@@ -151,17 +151,18 @@ class VocabularyView {
   }
 
   async getAllVocabulary() {
-    const notebooks = document.querySelectorAll('.notebook');
+    const notebooks = document.querySelectorAll(".notebook");
     let allVocabulary = [];
-    
+
     for (const notebook of notebooks) {
       const notebookId = notebook.dataset.id;
-      const words = await vocabularyModel.getVocabulariesByNotebookId(notebookId);
+      const words =
+        await vocabularyModel.getVocabulariesByNotebookId(notebookId);
       if (words && words.length > 0) {
         allVocabulary = [...allVocabulary, ...words];
       }
     }
-    
+
     return allVocabulary;
   }
 }
