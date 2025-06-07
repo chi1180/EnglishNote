@@ -37,7 +37,8 @@ class NotebookView {
     }
 
     const name =
-      this.newNoteBookFormName.value || filePaths[0].split("/").at(-1);
+      this.newNoteBookFormName.value ||
+      filePaths[0].split("/").at(-1).replace(".pdf", "");
 
     try {
       await notebookModel.createNotebook(name, filePaths);
